@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/styles/styles.css"/>
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div class="overlay">
+        <div class="menu">
+            <button id="bt-cancel">🗙</button>
+            <h1>Tic Tac Toe</h1>
+            <h5>vs</h5>
+            <button id="computer" class="bt-menu">Computer</button>
+            <button id="human" class="bt-menu">Human</button>
+            <div class="difficulty" style="visibility: hidden;">
+                <button id="easy">easy</button>
+                <button id="normal">normal</button>
+                <button id="godlike">godlike</button>
+            </div>
+            <footer>
+                <p id="img-src"><a target="_blank" href="https://www.freepik.com/free-vector/retro-80s-landscape-scene-game-style_16738431.htm">Image by starline</a> on Freepik</p>
+                <p id="me">by Smax</p>
+            </footer>
+        </div>
+    </div>
+    <nav>
+        <div class="empty"></div>
+
+        <div class="nav-menu">
+            <button id="bt-menu">Menu</button>
+            <button id="bt-new-game">New Game</button>
+        </div>
+        
+        <div class="empty"></div>
+        
+        <div class="game-display">
+            <p id="game-result"></p>
+        </div>
+        
+        <div class="empty"></div>
+        
+        <div class="total-result">
+            <!-- <h3>Total Wins</h3> -->
+            <p id="player-1"></p>
+            <p id="player-2"></p>
+            <div class="empty"></div>
+            <p id="difficulty-display"></p>
+            <p id="total-player-1"></p>
+            <p id="total-player-2"></p>
+        </div>
+        
+        <div class="empty"></div>
+    </nav>
+
+    <div class="game-area">
+        <button id="0-0" class="spaces"></button>
+        <button id="0-1" class="spaces"></button>
+        <button id="0-2" class="spaces"></button>
+        <button id="1-0" class="spaces"></button>
+        <button id="1-1" class="spaces"></button>
+        <button id="1-2" class="spaces"></button>
+        <button id="2-0" class="spaces"></button>
+        <button id="2-1" class="spaces"></button>
+        <button id="2-2" class="spaces"></button>
+    </div>
+    
+
+    <script src="./src/scripts/classes/Board.js" defer></script>
+    <script src="./src/scripts/classes/GameResult.js" defer></script>
+    <script src="./src/scripts/classes/RandomColorAnimation.js" defer></script>
+    <script src="./src/scripts/classes/Computer.js" defer></script>
+    <script src="./src/scripts/main.js" defer></script>
+</body>
+</html>

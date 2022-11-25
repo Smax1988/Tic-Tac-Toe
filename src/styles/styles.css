@@ -1,0 +1,304 @@
+/*RESET*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-weight: normal;
+    font-family: retro;
+}
+
+@font-face {
+    font-family: retro;
+    src: url(./fonts/retro/SFAlienEncounters.ttf);
+}
+
+/*_____DEFINING VARIABLES_____*/
+:root {
+    --color-dark:         #140420;
+    --color-medium-dark:  #310A3F;
+    --color-medium:       #C70554;
+    --color-medium-light: #DC327B;
+    --color-light:        #FF7486;
+
+    --color-dark-blue:    #161433;
+    --color-medium-blue:  #29007A;
+    --color-light-blue:   #08F4FD;
+}
+
+/*_____GENERAL_____*/
+body {
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to bottom, var(--color-medium-blue), var(--color-medium-light));
+    /* background: linear-gradient(to bottom, var(--color-medium-dark), var(--color-medium)); */
+}
+
+/*_____MENU OVERLAY_____ */
+.overlay {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.overlay .menu {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5);
+    width: 600px;
+    height: 420px;
+    margin: auto;
+    border: 5px solid white;
+    border-radius: 10px;
+    background-image: url("./img/menuBackground.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: var(--color-medium-blue);
+    position: relative;
+}
+
+.overlay .menu #bt-cancel {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    font-size: 1rem;
+    /* font-weight: bold; */
+    background-color: var(--color-medium-light);
+    color: white;
+    padding: 0 0 3px 1.5px;
+    margin: 0;
+}
+
+.overlay .menu #bt-cancel:hover {
+    cursor: pointer;
+    background-color: white;
+    color: var(--color-medium-light);
+}
+
+.overlay .menu h1 {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    padding-top: 20px;
+    grid-column: span 2;
+    font-size: 3rem;
+    /* font-weight: bold; */
+    color: white;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    background-image: linear-gradient(to top,var(--color-medium),var(--color-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.overlay .menu h5 {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    width: 100%;
+    grid-column: span 2;
+    font-size: 2.5rem;
+    /* font-weight: bold; */
+    color: white;
+}
+
+.overlay .menu .bt-menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 200px;
+    margin: auto;
+    border-radius: 5px;
+    border: 3px solid white;
+    background-color: var(--color-dark-blue);
+    color: white;;
+    font-size: 1.5rem;    
+}
+
+.overlay .menu .bt-menu:hover {
+    background-color: var(--color-medium-blue);
+    color: white;
+    cursor: pointer;
+}
+
+.overlay .menu .difficulty {
+    text-align: center;
+    display: block;
+    visibility: hidden;
+}
+
+.overlay .menu .difficulty button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 140px;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 3px solid white;
+    background-color: var(--color-medium-light);
+    color: white;
+    font-size: 1.2rem; 
+}
+
+.overlay .menu .difficulty button:hover {
+    cursor: pointer;
+    background-color: var(--color-medium-blue);
+    color: white;
+}
+
+.overlay .menu footer {
+    position: relative;
+    grid-column: span 2;
+    height: 100%;
+    text-align: right;
+}
+
+.overlay .menu footer #img-src {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 10px;
+    font-size: 0.6rem;
+    color: white;
+}
+
+.overlay .menu footer #img-src a {
+    color: var(--color-medium-light);
+    text-decoration: none;
+}
+
+.overlay .menu footer #img-src a:hover {
+    color: var(--color-light-blue); 
+    text-decoration:none; 
+    cursor:pointer;  
+}
+
+.overlay .menu footer #me {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px;
+    /* font-weight: bold; */
+    font-size: 0.8rem;
+    color: white;
+}
+/*_____END menu overlay END_____ */
+
+
+/*_____GAME AREA_____*/
+/*__Navigationsleiste__*/
+nav {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr 0.2fr 2fr 0.2fr 1fr 0.2fr;
+    grid-template-rows: 1fr;
+    position: fixed;
+    top: 20px;
+    width: 100%;
+}
+
+nav .nav-menu {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-content: stretch;
+   align-items: center;
+}
+
+.nav-menu button {
+    width: 100px;
+    margin: auto;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    height: 40px;
+    width: 190px;
+    border-radius: 5px;
+    border: 3px solid white;
+    background-color: var(--color-dark-blue);
+    color: var(--color-light-blue);
+    font-size: 1.5rem;
+}
+
+.nav-menu button:hover {
+    background-color: var(--color-light-blue);
+    color: var(--color-dark-blue);
+    cursor: pointer;
+    border: 3px solid var(--color-light-blue);
+}
+
+nav .game-display {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: center;
+    background-color: var(--color-dark);
+    border: 3px solid white;
+    border-radius: 5px;
+    
+}
+
+nav .game-display p {
+    color: white;
+    font-size: 2rem;
+    /* font-weight: bold; */
+    margin: 0 auto;
+    text-align: center;
+}
+
+nav .total-result {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 0.5fr 1fr;
+    color: white;
+    background-color: var(--color-dark);
+    text-align: center;
+    border: 3px solid white;
+    border-radius: 5px;
+    overflow: hidden;
+    padding: 8px;
+}
+
+
+nav .total-result h3, p {
+    margin: auto;
+    font-size: 1.2rem;
+}
+
+nav .total-result #total-player-1, nav .total-result #total-player-2 {
+    /* font-weight: bold; */
+    font-size: 1.9rem;
+}
+
+nav .total-result #difficulty-display {
+    font-size: 0.8rem;
+}
+
+/*_____SPIELFELD_____*/
+.game-area {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+}
+
+.spaces {
+    margin: 1.5px;
+    color: var(--color-medium-dark);
+    font-size: 5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+/*_____END game area END_____*/
