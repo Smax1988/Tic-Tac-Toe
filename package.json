@@ -1,0 +1,23 @@
+{
+  "name": "ttt-game",
+  "version": "1.0.0",
+  "description": "A standard tic tac toe game. You can play against a computer opponent with different difficulties or against another player.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Smax1988/Tic-Tac-Toe.git"
+  },
+  "keywords": [
+    "Tic Tac Toe",
+    "Game"
+  ],
+  "author": "Maximilian Schmidt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Smax1988/Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/Smax1988/Tic-Tac-Toe#readme"
+}

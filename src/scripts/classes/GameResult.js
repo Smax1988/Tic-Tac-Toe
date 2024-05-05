@@ -2,7 +2,7 @@
 /**
  * Die Klasse stellt alle Methoden zur Ermittlung des aktuellen Spielstandes zur Verfügung
  */
-class GameResult {
+export default class GameResult {
 
     /**
      * Der Konstruktor erstellt beim Instanziieren der Klasse GameResult das Array winningLine.

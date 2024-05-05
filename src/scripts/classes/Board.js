@@ -3,7 +3,7 @@
  * Die Klasse stellt alle Methoden zur Verfügung, die für die generelle Abwicklung des Spiels 
  * benötigt werden.
  */
-class Board {
+export default class Board {
 
     /**
      * Der Konstruktor erstellt bei Instanziierung der Klasse "Board" die Ergebnismatrix (this._borad) als Repräsentation
