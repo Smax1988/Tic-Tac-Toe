@@ -2,7 +2,7 @@
 /**
  * Klasse stellt alle Methoden zur Verfügung, die für den Computer-Gegner benötigt werden.
  */
-class Computer {
+export default class Computer {
 
     /**
      * Diese Methode bestimmt alle unbestzten Felder des Spielfeldes.

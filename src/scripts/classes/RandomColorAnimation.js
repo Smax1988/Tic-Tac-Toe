@@ -3,7 +3,7 @@
  * Diese Klasse stellte alle Methoden zur Verfügung, die für die Win-Animation benötigt werden.
  * Die Win-Animation färbt die drei Felder, die zum Sieg geführt haben, in einem gegebenen Intervall neu ein.
  */
-class RandomColorAnimation {
+export default class RandomColorAnimation {
     /**
      * Der Konstruktor erstell beim Instanziieren die Variable intervalID, welche zum beenden der Animation benötigt wird. 
      */
