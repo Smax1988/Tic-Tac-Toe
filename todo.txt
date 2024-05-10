@@ -1,18 +1,9 @@
-# Html dynamisch generieren
-===========================
-
-- neue Klasse "Game" oder "TicTacToe" mit Konstruktor-Parameter "elementToAppendGame"
-- Eine Funktion "CreateGame(elementToAppendGame)", welche das dynamisch generierte Html an das übergebene element anhängt.
-- mehrere Funktionen, welche die einzelnen Teile des Htmls generiert. Die Methode CreateGame() orchestriert die Zusammenstellung des Html
-- index.html soll komplett verschwinden
-
-
-
 # NPM Package erstellen und publishen
 =====================================
 
 - NPM Package soll alle Klassen zur Verfügung stellen.
-- Der Benutzer des Packages soll nur eine Instanz der Klasse "TicTacToe" erstellen und mit tictactoe.CreateGame(elementToAppendGame) das Spiel einbinden können.
+- Der Benutzer des Packages soll nur die main.js in sein html einbinden müssen.
+- main.js umbennen, sodass klar ist, dass es sich um das Spiel handelt.
 
 
 
@@ -27,3 +18,7 @@
 
 # Readme erstellen, die erklärt, wie das Package funktioniert
 =============================================================
+- main.js einbinden
+- styles.css einbinden
+- images?
+- fonts?
