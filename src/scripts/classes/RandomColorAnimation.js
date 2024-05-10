@@ -105,14 +105,14 @@ export default class RandomColorAnimation {
      * Methode startet die Animation und führt den Farbwechsel im gewünschten Intervall aus
      * @param {number} interval - in Millisekunden  
      */
-    startRepeatFunction(interval) {
+    static startRepeatFunction(interval) {
         this.intervalID = setInterval(this.backgroundColor, interval);
     }
 
     /**
      * Methode stopt die Animation
      */
-    stopRepeatFunction() {
+    static stopRepeatFunction() {
         clearInterval(this.intervalID);
     }
 }
