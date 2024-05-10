@@ -1,4 +1,8 @@
 "use strict";
+import GameResult from './GameResult.js';
+import RandomColorAnimation from './RandomColorAnimation.js';
+import Computer from './Computer.js';
+
 /**
  * Die Klasse stellt alle Methoden zur Verfügung, die für die generelle Abwicklung des Spiels 
  * benötigt werden.
@@ -85,7 +89,7 @@ export default class Board {
         ];
         this.result.removeAttribute('style');
         this.spaces.forEach(space => space.removeAttribute('style'));
-        gameResult.winningLine = [];
+        GameResult.winningLine = [];
         this.player = 1;
         this.displayPlayer();
         document.getElementById("total-player-1").style.color = "white";
@@ -124,25 +128,25 @@ export default class Board {
      * Diese Methode lässt den Computer je nach gewählter Schwierigkeitsstufe auf ein Feld setzen
      * und schreibt dann seine Wahl in die Ergebnismatrix
      */
-    computerSetSymbol() {
+    computerSetSymbol(board) {
         switch (this.difficulty) {
             case "easy":
-                let choiceEasy = computer.easyChooseSpace();
+                let choiceEasy = Computer.easyChooseSpace(board);
                 document.getElementById(choiceEasy).innerHTML = "O";
                 document.getElementById(choiceEasy).style.color = "#C70554";
-                this.writeToBoard(board._board, choiceEasy, this.player);
+                Board.writeToBoard(board, choiceEasy, this.player);
                 break;
             case "normal":
-                let choiceNormal = computer.normalChooseSpace();
+                let choiceNormal = Computer.normalChooseSpace(board);
                 document.getElementById(choiceNormal).innerHTML = "O";
                 document.getElementById(choiceNormal).style.color = "#C70554";
-                this.writeToBoard(board._board, choiceNormal, this.player);
+                Board.writeToBoard(board, choiceNormal, this.player);
                 break;
             case "godlike":
-                let choiceGodlike = computer.godlikeChooseSpace(this._board, this.player).id;
+                let choiceGodlike = Computer.godlikeChooseSpace(this._board, this.player).id;
                 document.getElementById(choiceGodlike).innerHTML = "O";
                 document.getElementById(choiceGodlike).style.color = "#C70554";
-                this.writeToBoard(board._board, choiceGodlike, this.player);
+                Board.writeToBoard(board, choiceGodlike, this.player);
                 break;
             default:
                 break;
@@ -167,7 +171,7 @@ export default class Board {
      * @param {number} player - 1 für Spieler X, 2 für Spieler O, 0 für keinen Spieler = default;
      * @returns {array} board - das nun um einen Spielzug aktualisierte Spielfeld =Ergebnismatrix
      */
-    writeToBoard(board, id, player=0) {
+    static writeToBoard(board, id, player=0) {
         let arr = id.split("-");
         arr.map(element => parseInt(element));
         switch (player) {
@@ -266,24 +270,24 @@ export default class Board {
         switch (winner) {
             case 0:
                 this.result.innerHTML = "Draw!";
-                randomColorAnimation.startRepeatFunction(200);
+                RandomColorAnimation.startRepeatFunction(200);
                 break;
             case 1:
                 if(this.computer) {
                     this.result.innerHTML = "You win!";
-                    randomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200);
                 } else {
                     this.result.innerHTML = "Player X wins!";
-                    randomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200);
                 }
                 break;
             case 2:
                 if (this.computer) {
                     this.result.innerHTML = "Computer wins!";
-                    randomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200);
                 } else {
                     this.result.innerHTML = "Player O wins!";
-                    randomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200);
                 }
                 break;
             default:
