@@ -22,7 +22,7 @@ export default class GameResult {
      * Die Zahl 2 wenn Spieler O gewonnen hat. 
      * Die Zahl 0 wenn ein Unentschieden vorliegt.
      */
-    getGameResult(board) {
+    static getGameResult(board) {
         let arr = [];
         board.forEach(element => {
             element.forEach(ele => {
@@ -45,7 +45,7 @@ export default class GameResult {
      * @returns {number} - Die Zahl 1 wenn Spieler X gewonnen hat. Die Zahl 2 wenn Spieler O gewonnen hat. 
      * Die Zahl 0 wenn ein Unentschieden vorliegt.
      */
-    _determine_winner(board) {
+    static _determine_winner(board) {
         let rows = GameResult.get_rows(board);
         let cols = GameResult.get_columns(board);
         let diags = GameResult.get_diagonals(board);
@@ -94,7 +94,7 @@ export default class GameResult {
      * Die Zahl 2 wenn Spieler O drei Symbole auf einer Linie hat. 
      * Die Zahl 0 wenn keiner der beiden Spieler drei Symbole auf einer Linie hat.
      */
-    _win_conditions(direction) {
+    static _win_conditions(direction) {
         let winner = 0;
         direction.forEach(ele => {
             if (ele[0] === "1" && ele[1]  === "1" && ele[2] === "1") {

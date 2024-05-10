@@ -1,4 +1,8 @@
 "use strict";
+
+import GameResult from './GameResult.js';
+import Board from './Board.js';
+
 /**
  * Klasse stellt alle Methoden zur Verfügung, die für den Computer-Gegner benötigt werden.
  */
@@ -10,7 +14,7 @@ export default class Computer {
      * Enthält die derzeitigen Züge der Spieler: 0 entpricht leeres Feld, 1 entspricht Spieler X, 2 entspricht spieler O.
      * @returns {array} emptySpaces - eindimensionales Array mit den id's aller leeren Felder.
      */
-    getEmptySpaces(board) {
+    static getEmptySpaces(board) {
         let emptySpaces = [];
     
         for (let i = 0; i < board.length; i++) {
@@ -28,7 +32,7 @@ export default class Computer {
      * @param {array} emptySpaces - eindimensionales Array mit den id's der leeren Felder.
      * @returns {string} id eines einzelnen leeren Feldes 
      */
-    chooseRandom(emptySpaces) {
+    static chooseRandom(emptySpaces) {
         const random_number = () => Math.floor(Math.random() * (emptySpaces.length));
          return emptySpaces[random_number()];
     }
@@ -41,7 +45,7 @@ export default class Computer {
      * @returns {array} - bestehend aus Objekten. Beispiel: [{"player": 2, "elementID": "2-0"}, {"player": 1, "elementID": "2-0"}]
      * Jedes Objekt enthält den Spieler und die id des Feldes, welches zum Sieg des Spielers führen würde.
      */
-    getElementIDNeededToWin(board) {
+    static getElementIDNeededToWin(board) {
         
         // Sammelt alle Zeilen, Spalten und Reihen der Ergebnismatrix in einem Objekt.
         let allLines = {
@@ -148,8 +152,8 @@ export default class Computer {
      * Der Computer-Gegner der Schwierigkeitsstufe "easy" bedient sich dieser Methode, um ein Feld auszuwählen.
      * @returns {string} - id des gewählten Feldes
      */
-    easyChooseSpace() {
-        return this.chooseRandom(this.getEmptySpaces(board._board))
+    static easyChooseSpace(board) {
+        return Computer.chooseRandom(this.getEmptySpaces(board))
     }
 
     /**
@@ -160,12 +164,12 @@ export default class Computer {
      * Sollte es beide Möglichkeiten geben, priorisiert der Computer das Feld, das ihn selbst gewinnen lässt, bevor er den Sieg des Spielers verhindert. 
      * @returns {string} - id des gewählten Feldes
      */
-    normalChooseSpace() {
-        let elementIDsNeededToWin = this.getElementIDNeededToWin(board._board);
+    static normalChooseSpace(board) {
+        let elementIDsNeededToWin = this.getElementIDNeededToWin(board);
         let choice;
-        if (gameResult.getGameResult(board._board) === -1) {
+        if (GameResult.getGameResult(board) === -1) {
             if (elementIDsNeededToWin.length === 0) {
-                return this.easyChooseSpace();
+                return this.easyChooseSpace(board);
             } else if (elementIDsNeededToWin.length !== 0) {
                 elementIDsNeededToWin.forEach(object => {
                     if (object['player'] === 1) {
@@ -190,13 +194,13 @@ export default class Computer {
      * @param {number} player - - 1 für Spieler X, 2 für Spieler O.
      * @returns {object} bestMove - enthält die id des Feldes und die evaluation des Zuges
      */
-    godlikeChooseSpace(currentBoard, player) {
+    static godlikeChooseSpace(currentBoard, player) {
         // Base
-        if (gameResult.getGameResult(currentBoard) === 1) {
+        if (GameResult.getGameResult(currentBoard) === 1) {
             return {evaluation: -1};
-        } else if (gameResult.getGameResult(currentBoard) === 2) {
+        } else if (GameResult.getGameResult(currentBoard) === 2) {
             return {evaluation: 1};
-        } else if (gameResult.getGameResult(currentBoard) === 0) {
+        } else if (GameResult.getGameResult(currentBoard) === 0) {
             return {evaluation: 0};
         } 
         // Bestimme alle leeren Felder    
@@ -215,7 +219,7 @@ export default class Computer {
             let saveMoveID = id;
 
             // Schreibe den Zug in die Ergebnismatrix
-            board.writeToBoard(currentBoard, id, player);
+            Board.writeToBoard(currentBoard, id, player);
             
 
             // Bewerte den Zug
@@ -229,11 +233,11 @@ export default class Computer {
             moves.push(move);
 
             // Wiederherstellung der Ergebnismatrix auf die Situation vor dem Zug.
-            board.writeToBoard(currentBoard, saveMoveID);
+            Board.writeToBoard(currentBoard, saveMoveID);
 
             // Das array winningLine, welches für die Win-Animation benötigt wird und bei jedem Aufruf von getGameResult() erstellt wird,
             // muss am Ende wieder geleert werden. 
-            gameResult.winningLine = [];
+            GameResult.winningLine = [];
         }
         
         // MINIMAX ALGORITHMUS
