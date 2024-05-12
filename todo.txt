@@ -1,21 +1,3 @@
-# NPM Package erstellen und publishen
-=====================================
-
-- NPM Package soll alle Klassen zur Verfügung stellen.
-- Der Benutzer des Packages soll nur die main.js in sein html einbinden müssen.
-- main.js umbennen, sodass klar ist, dass es sich um das Spiel handelt.
-
-
-
-# Projektstruktur ändern
-========================
-
-- ein Ordner für die Javascript Klassen
-- ein Ordner für Assets (fonts, image, css)
-- evtl. eine bessere Lösung für css finden. Im besten Fall muss der Nutzer des Packages sich nicht darum kümmern, das css selbst einzubinden
-
-
-
 # Readme erstellen, die erklärt, wie das Package funktioniert
 =============================================================
 - main.js einbinden
