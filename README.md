@@ -8,7 +8,7 @@ npm install ttt-game
 ```
 
 ## Usage
-Import TicTacToe from 'ttt-game' and call the initialize method within your JavaScript code:
+Import TicTacToe from 'ttt-game' and call the initialize method within a document ready:
 
 ```javascript
 import TicTacToe from 'ttt-game';
