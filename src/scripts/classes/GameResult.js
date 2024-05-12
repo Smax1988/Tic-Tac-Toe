@@ -4,13 +4,7 @@
  */
 export default class GameResult {
 
-    /**
-     * Der Konstruktor erstellt beim Instanziieren der Klasse GameResult das Array winningLine.
-     * Dieses wird für die Win-Animation benötigt (siehe Klasse RandomColorAnimation). 
-     */
-    constructor() {
-        this.winningLine = [];
-    }
+    static winningLine = [];
 
     /**
      * Diese Methode bestimmt den aktuellen Stand des Spiels mit Hilfe der privaten Methode _determine_winner().

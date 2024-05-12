@@ -270,24 +270,24 @@ export default class Board {
         switch (winner) {
             case 0:
                 this.result.innerHTML = "Draw!";
-                RandomColorAnimation.startRepeatFunction(200);
+                RandomColorAnimation.startRepeatFunction(200, winner);
                 break;
             case 1:
                 if(this.computer) {
                     this.result.innerHTML = "You win!";
-                    RandomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200, winner);
                 } else {
                     this.result.innerHTML = "Player X wins!";
-                    RandomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200, winner);
                 }
                 break;
             case 2:
                 if (this.computer) {
                     this.result.innerHTML = "Computer wins!";
-                    RandomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200, winner);
                 } else {
                     this.result.innerHTML = "Player O wins!";
-                    RandomColorAnimation.startRepeatFunction(200);
+                    RandomColorAnimation.startRepeatFunction(200, winner);
                 }
                 break;
             default:

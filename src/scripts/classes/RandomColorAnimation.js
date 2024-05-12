@@ -1,22 +1,21 @@
 "use strict";
+
+import GameResult from "./GameResult.js";
+
 /**
  * Diese Klasse stellte alle Methoden zur Verfügung, die für die Win-Animation benötigt werden.
  * Die Win-Animation färbt die drei Felder, die zum Sieg geführt haben, in einem gegebenen Intervall neu ein.
  */
 export default class RandomColorAnimation {
-    /**
-     * Der Konstruktor erstell beim Instanziieren die Variable intervalID, welche zum beenden der Animation benötigt wird. 
-     */
-    constructor() {
-        this.intervalID;
-    }
+
+    static intervalID;
 
     /**
      * Methode erzeugt eine zufällige Farbe und färbt bestimmte Felder damit ein.
      * Es werden alle Felder eingefärbt, wenn das Spiel unentschieden endet.
      * Ansonsten werden nur die Felder eingefärbt, die zum Sieg geführt haben. 
      */
-    backgroundColor() {
+    static backgroundColor(winner) {
 
         // Array mit hexcodes der Farben. Bildet den Pool der Farben, aus dem zufällig eine Farbe ausgewählt wird.
         let colorPool = ["#140420", "#310A3F", "#C70554", "#DC327B", "#FF7486", "#161433", "#08F4FD", "#FFF"];
@@ -81,7 +80,7 @@ export default class RandomColorAnimation {
                 });
                 break;
             case 1:
-                getWinningSpacesID(gameResult.winningLine).forEach(id => {
+                getWinningSpacesID(GameResult.winningLine).forEach(id => {
                     document.getElementById(`${id}`).style.background = chooseRandomColorFrom(colorPool);
                     document.getElementById(`${id}`).style.color = chooseRandomColorFrom(colorPool);
                     document.querySelector("#game-result").style.color = chooseRandomColorFrom(colorPool);
@@ -89,7 +88,7 @@ export default class RandomColorAnimation {
                 })
                 break;
             case 2:
-                getWinningSpacesID(gameResult.winningLine).forEach(id => {
+                getWinningSpacesID(GameResult.winningLine).forEach(id => {
                     document.getElementById(`${id}`).style.background = chooseRandomColorFrom(colorPool);
                     document.getElementById(`${id}`).style.color = chooseRandomColorFrom(colorPool);
                     document.querySelector("#game-result").style.color = chooseRandomColorFrom(colorPool);
@@ -105,8 +104,10 @@ export default class RandomColorAnimation {
      * Methode startet die Animation und führt den Farbwechsel im gewünschten Intervall aus
      * @param {number} interval - in Millisekunden  
      */
-    static startRepeatFunction(interval) {
-        this.intervalID = setInterval(this.backgroundColor, interval);
+    static startRepeatFunction(interval, winner) {
+        this.intervalID = setInterval(() => {
+            this.backgroundColor(winner);
+        }, interval);
     }
 
     /**
