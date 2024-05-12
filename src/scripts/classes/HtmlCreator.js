@@ -1,6 +1,6 @@
 "use strict";
 
-export default class TicTacToe { 
+export default class HtmlCreator { 
 
     constructor(elementToAppendGame) {
         this.gameContainer = this._createGameContainer();
@@ -12,6 +12,7 @@ export default class TicTacToe {
         this.gameContainer.appendChild(this._createMainMenu());
         this.gameContainer.appendChild(this._createNavigation());
         this.gameContainer.appendChild(this._createGameArea());
+        this._createStyleSheetLink();
     }
 
     _createGameContainer() {
@@ -36,20 +37,21 @@ export default class TicTacToe {
         return button;
     }
 
-    _createParagraph(id, paragraphText, linkText = null, url = null) {
+    _createParagraph(id, paragraphText) {
         let paragraph = document.createElement("p");
         paragraph.id = id;
         paragraph.textContent = paragraphText;
-
-        if (url) {
-            let link = document.createElement("a");
-            link.href = url;
-            link.target = "_blank";
-            link.textContent = linkText || "";
-            paragraph.appendChild(link);
-        }
         
         return paragraph;
+    }
+
+    _createLink(linkText, url) {
+        let link = document.createElement("a");
+        link.href = url;
+        link.target = "_blank";
+        link.textContent = linkText;
+
+        return link;
     }
 
     _createHeadline(type, text) {
@@ -77,9 +79,15 @@ export default class TicTacToe {
         menu.appendChild(difficulty);
 
         let footer = document.createElement("footer");
-        footer.appendChild(this._createParagraph("img-src", "on Freepik", "Image by Starlink", "https://www.freepik.com/free-vector/retro-80s-landscape-scene-game-style_16738431.htm"));
+        let paragraph = this._createParagraph("img-src");
+        let link1 = this._createLink("Image by Starline", "https://www.freepik.com/author/starline")
+        let link2 = this._createLink("on Freepik", "https://www.freepik.com");
+        paragraph.appendChild(link1);
+        paragraph.appendChild(link2);
+        footer.appendChild(paragraph);
         footer.appendChild(this._createParagraph("me", "by Smax"));
-
+        
+        menu.appendChild(footer);
         overlay.appendChild(menu);
 
         return overlay;
@@ -125,5 +133,13 @@ export default class TicTacToe {
             }
         }
         return gameArea;
+    }
+
+    _createStyleSheetLink() {
+        let link = document.createElement("link");
+        link.href = "./src/styles/styles.css";
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
     }
 }
