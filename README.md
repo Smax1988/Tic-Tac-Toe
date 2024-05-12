@@ -1,6 +1,6 @@
 ## Usage
 
-**Npm**
+### Npm
 
 Download:
 
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 ```
 
-**Github**
+### Github
 
 Clone from github:
 ```bash
