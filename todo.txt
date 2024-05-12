@@ -1,6 +1,3 @@
 # Readme erstellen, die erklärt, wie das Package funktioniert
 =============================================================
-- main.js einbinden
-- styles.css einbinden
-- images?
-- fonts?
+- ttt-game.js einbinden
