@@ -2,31 +2,27 @@
 
 export default class HtmlCreator { 
 
-    constructor(elementToAppendGame) {
-        this.gameContainer = this._createGameContainer();
-        elementToAppendGame.appendChild(this.gameContainer);
-        this._createGame();
-    }
-
-    _createGame() {
-        this.gameContainer.appendChild(this._createMainMenu());
-        this.gameContainer.appendChild(this._createNavigation());
-        this.gameContainer.appendChild(this._createGameArea());
+    static createGame(elementToAppendGame) {
+        let gameContainer = this._createGameContainer();
+        elementToAppendGame.appendChild(gameContainer);
+        gameContainer.appendChild(this._createMainMenu());
+        gameContainer.appendChild(this._createNavigation());
+        gameContainer.appendChild(this._createGameArea());
         this._createStyleSheetLink();
     }
 
-    _createGameContainer() {
+    static _createGameContainer() {
         return this._createDiv("game-wrapper");
     }
     
-    _createDiv(className) {
+    static _createDiv(className) {
         let div = document.createElement("div");
         div.className = className;
         
         return div;
     }
     
-    _createButton(id, className, text) {
+    static _createButton(id, className, text) {
         let button = document.createElement("button");
         button.id = id;
         button.textContent = text || "";
@@ -37,7 +33,7 @@ export default class HtmlCreator {
         return button;
     }
 
-    _createParagraph(id, paragraphText) {
+    static _createParagraph(id, paragraphText) {
         let paragraph = document.createElement("p");
         paragraph.id = id;
         paragraph.textContent = paragraphText;
@@ -45,7 +41,7 @@ export default class HtmlCreator {
         return paragraph;
     }
 
-    _createLink(linkText, url) {
+    static _createLink(linkText, url) {
         let link = document.createElement("a");
         link.href = url;
         link.target = "_blank";
@@ -54,14 +50,14 @@ export default class HtmlCreator {
         return link;
     }
 
-    _createHeadline(type, text) {
+    static _createHeadline(type, text) {
         let headline = document.createElement(type);
         headline.textContent = text;
         
         return headline;
     }
 
-    _createMainMenu() {
+    static _createMainMenu() {
         let overlay = this._createDiv("overlay");
         let menu = this._createDiv("menu");
 
@@ -93,7 +89,7 @@ export default class HtmlCreator {
         return overlay;
     }
 
-    _createNavigation() {
+    static _createNavigation() {
         let navigation = document.createElement("nav");
         navigation.appendChild(this._createDiv("empty"));
         
@@ -124,7 +120,7 @@ export default class HtmlCreator {
         return navigation;
     }
 
-    _createGameArea() {
+    static _createGameArea() {
         let gameArea = this._createDiv("game-area");
 
         for(let i = 0; i < 3; i++) {
@@ -135,7 +131,7 @@ export default class HtmlCreator {
         return gameArea;
     }
 
-    _createStyleSheetLink() {
+    static _createStyleSheetLink() {
         let link = document.createElement("link");
         link.href = "./src/styles/styles.css";
         link.type = "text/css";
