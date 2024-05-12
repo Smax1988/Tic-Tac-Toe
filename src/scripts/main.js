@@ -3,22 +3,18 @@
 import Board from './classes/Board.js';
 import GameResult from './classes/GameResult.js';
 import RandomColorAnimation from './classes/RandomColorAnimation.js';
-import Computer from './classes/Computer.js';
 import TicTacToe from './classes/TicTacToe.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const ticTacToe = new TicTacToe(document.body);
-
-    let winner = -1;
-
+    
     /**
-     * Instanzierung aller Klassen:
+     * Instanzierung der Klassen:
      * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
      */
+    const ticTacToe = new TicTacToe(document.body);
     const board = new Board();
-    const gameResult = new GameResult();
-    const randomColorAnimation = new RandomColorAnimation();
-    const computer = new Computer();
+
+    let winner = -1;
 
 
     /**
