@@ -1,6 +1,6 @@
 {
   "name": "ttt-game",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A standard tic tac toe game. You can play against a computer opponent with different difficulties or against another player.",
   "main": "ttt-game.js",
   "scripts": {
