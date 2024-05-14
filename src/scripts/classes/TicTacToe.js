@@ -7,10 +7,10 @@ import RandomColorAnimation from './RandomColorAnimation.js';
 
 export default class TicTacToe {
 
-    static initialize(elementToAppendGameTo) {
+    static initialize(elementToAppendGameTo, cssFile) {
         
         // Create the html
-        HtmlCreator.createGame(elementToAppendGameTo);
+        HtmlCreator.createGame(elementToAppendGameTo, cssFile);
         
         const board = new Board();
 

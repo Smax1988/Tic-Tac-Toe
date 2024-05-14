@@ -8,6 +8,9 @@
     </head>
     <body>
         
-        <script type="module" src="./src/scripts/ttt-game.js" defer></script>
+        <script type="module">
+            import TicTacToe from './src/scripts/ttt-game.js';
+            TicTacToe.initialize(document.body);
+        </script>
     </body>
 </html>
