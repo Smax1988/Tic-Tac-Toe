@@ -2,13 +2,13 @@
 
 export default class HtmlCreator { 
 
-    static createGame(elementToAppendGame) {
+    static createGame(elementToAppendGame, cssFile = "./src/styles/styles.css") {
         let gameContainer = this._createGameContainer();
         elementToAppendGame.appendChild(gameContainer);
         gameContainer.appendChild(this._createMainMenu());
         gameContainer.appendChild(this._createNavigation());
         gameContainer.appendChild(this._createGameArea());
-        this._createStyleSheetLink();
+        this._createStyleSheetLink(cssFile);
     }
 
     static _createGameContainer() {
@@ -131,9 +131,9 @@ export default class HtmlCreator {
         return gameArea;
     }
 
-    static _createStyleSheetLink() {
+    static _createStyleSheetLink(cssFile) {
         let link = document.createElement("link");
-        link.href = "./src/styles/styles.css";
+        link.href = cssFile;
         link.type = "text/css";
         link.rel = "stylesheet";
         document.head.appendChild(link);
