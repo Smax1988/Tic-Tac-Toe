@@ -1,8 +1,19 @@
 "use strict";
 
+/**
+ * HtmlCreator ist eine Hilfsklasse zur Erstellung von HTML-Elementen für ein Tic Tac Toe Spiel.
+ * Diese Klasse enthält statische Methoden zur Erstellung und Manipulation von verschiedenen
+ * HTML-Komponenten wie Spielcontainer, Buttons, Paragraphen, Links, Überschriften, Hauptmenü,
+ * Navigationsleiste und Spielbereich.
+ */
 export default class HtmlCreator { 
 
-    static createGame(elementToAppendGame, cssFile = "./src/styles/styles.css") {
+    /**
+     * Erstellt und hängt das Spiel an ein angegebenes HTML-Element an und fügt das CSS-Stylesheet hinzu.
+     * @param {HTMLElement} elementToAppendGame - Das HTML-Element, an das das Spiel angehängt werden soll.
+     * @param {string} cssFile - Der Pfad zur CSS-Datei.
+     */
+    static createGame(elementToAppendGame, cssFile) {
         let gameContainer = this._createGameContainer();
         elementToAppendGame.appendChild(gameContainer);
         gameContainer.appendChild(this._createMainMenu());
@@ -11,10 +22,19 @@ export default class HtmlCreator {
         this._createStyleSheetLink(cssFile);
     }
 
+    /**
+     * Erstellt einen Container für das Spiel.
+     * @returns {HTMLDivElement} - Das div-Element, das den Spiel-Container darstellt.
+     */
     static _createGameContainer() {
         return this._createDiv("game-wrapper");
     }
     
+    /**
+     * Erstellt ein div-Element mit einer angegebenen Klasse.
+     * @param {string} className - Der Name der CSS-Klasse.
+     * @returns {HTMLDivElement} - Das erstellte div-Element.
+     */
     static _createDiv(className) {
         let div = document.createElement("div");
         div.className = className;
@@ -22,6 +42,13 @@ export default class HtmlCreator {
         return div;
     }
     
+    /**
+     * Erstellt ein Button-Element mit der angegebenen ID, Klasse und Text.
+     * @param {string} id - Die ID des Buttons.
+     * @param {string} className - Die CSS-Klasse des Buttons.
+     * @param {string} text - Der Text des Buttons.
+     * @returns {HTMLButtonElement} - Das erstellte Button-Element.
+     */
     static _createButton(id, className, text) {
         let button = document.createElement("button");
         button.id = id;
@@ -33,6 +60,12 @@ export default class HtmlCreator {
         return button;
     }
 
+    /**
+     * Erstellt ein Paragraph-Element mit der angegebenen ID und Text.
+     * @param {string} id - Die ID des Paragraphen.
+     * @param {string} paragraphText - Der Text des Paragraphen.
+     * @returns {HTMLParagraphElement} - Das erstellte Paragraph-Element.
+     */
     static _createParagraph(id, paragraphText) {
         let paragraph = document.createElement("p");
         paragraph.id = id;
@@ -41,6 +74,12 @@ export default class HtmlCreator {
         return paragraph;
     }
 
+    /**
+     * Erstellt ein Link-Element mit dem angegebenen Text und der URL.
+     * @param {string} linkText - Der Text des Links.
+     * @param {string} url - Die URL, auf die der Link verweist.
+     * @returns {HTMLAnchorElement} - Das erstellte Link-Element.
+     */
     static _createLink(linkText, url) {
         let link = document.createElement("a");
         link.href = url;
@@ -50,6 +89,12 @@ export default class HtmlCreator {
         return link;
     }
 
+    /**
+     * Erstellt eine Überschrift mit dem angegebenen Typ und Text.
+     * @param {string} type - Der Typ der Überschrift (z.B. "h1", "h2").
+     * @param {string} text - Der Text der Überschrift.
+     * @returns {HTMLElement} - Das erstellte Überschriften-Element.
+     */
     static _createHeadline(type, text) {
         let headline = document.createElement(type);
         headline.textContent = text;
@@ -57,6 +102,11 @@ export default class HtmlCreator {
         return headline;
     }
 
+    /**
+     * Erstellt das Hauptmenü des Spiels.
+     * Das Hauptmenü besteht aus einem Overlay, dem eigentlichen Menü, Schwierigkeitsoptionen und einem Footer.
+     * @returns {HTMLDivElement} - Das div-Element, das das Hauptmenü-Overlay darstellt.
+     */
     static _createMainMenu() {
         let overlay = this._createDiv("overlay");
         let menu = this._createDiv("menu");
@@ -89,6 +139,11 @@ export default class HtmlCreator {
         return overlay;
     }
 
+    /**
+     * Erstellt die Navigationsleiste des Spiels.
+     * Die Navigation besteht aus Navigationsmenü, Spielanzeige und Gesamtergebniss.
+     * @returns {HTMLElement} - Das nav-Element, das die Navigationsleiste darstellt.
+     */
     static _createNavigation() {
         let navigation = document.createElement("nav");
         navigation.appendChild(this._createDiv("empty"));
@@ -120,6 +175,10 @@ export default class HtmlCreator {
         return navigation;
     }
 
+    /**
+     * Erstellt den Spielbereich mit einem 3x3 Raster.
+     * @returns {HTMLDivElement} - Das div-Element, das den Spielbereich darstellt.
+     */
     static _createGameArea() {
         let gameArea = this._createDiv("game-area");
 
@@ -131,6 +190,10 @@ export default class HtmlCreator {
         return gameArea;
     }
 
+    /**
+     * Erstellt ein Link-Element für das CSS-Stylesheet und fügt es dem Dokumentenkopf hinzu.
+     * @param {string} cssFile - Der Pfad zur CSS-Datei.
+     */
     static _createStyleSheetLink(cssFile) {
         let link = document.createElement("link");
         link.href = cssFile;
