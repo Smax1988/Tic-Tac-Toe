@@ -5,9 +5,24 @@ import Board from './Board.js';
 import GameResult from './GameResult.js';
 import RandomColorAnimation from './RandomColorAnimation.js';
 
+/**
+ * Diese Klasse repräsentiert das TicTacToe-Spiel. Sie enthält die statische Methode initialize,
+ * die das Spiel initialisiert, das HTML-Layout erstellt und alle erforderlichen Event-Listener
+ * für die Interaktion mit dem Spiel hinzufügt. Die Klasse nutzt dabei die Board-Klasse, um das
+ * Spielbrett zu verwalten und die Spielmechanik zu handhaben.
+ */
 export default class TicTacToe {
 
-    static initialize(elementToAppendGameTo, cssFile) {
+    /**
+     * Diese Methode initialisiert das TicTacToe-Spiel. Sie erstellt das HTML-Layout für das Spiel,
+     * fügt Event-Listener für die Benutzerinteraktion hinzu und konfiguriert die Spielparameter.
+     * Die Methode akzeptiert zwei optionale Parameter: elementToAppendGameTo und cssFile.
+     * Wenn diese Parameter nicht angegeben werden, werden Standardwerte verwendet.
+     * 
+     * @param {HTMLElement} [elementToAppendGameTo=document.body] - Das HTML-Element, an das das Spiel angehängt wird. Default: document.body
+     * @param {string} [cssFile="./src/styles/styles.css"] - Der Pfad zur CSS-Datei, die für das Spiel verwendet wird. Default: "./src/styles/styles.css"
+     */
+    static initialize(elementToAppendGameTo = document.body, cssFile = "./src/styles/styles.css") {
         
         // Create the html
         HtmlCreator.createGame(elementToAppendGameTo, cssFile);
