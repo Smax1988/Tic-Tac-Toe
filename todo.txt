@@ -1,1 +1,17 @@
-# Alle Kommentare überarbeiten, da sich nach dem Refactoring einiges geändert hat.
+# Kommentare überarbeiten
+=========================
+
+- Board
+- Computer
+- GameResult
+- RandomColorAnimation
+
+
+# README.md überarbeiten
+========================
+
+Usage
+
+1. in asp.net Core MVC
+
+2. Standalone?? -> chatGPT fragen, wie man das nennt
