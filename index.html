@@ -10,7 +10,9 @@
 
         <script type="module">
             import TicTacToe from './src/scripts/ttt-game.js';
-            TicTacToe.initialize();
+            document.addEventListener('DOMContentLoaded', () => {
+                TicTacToe.initialize();
+            });
         </script>
     </body>
 </html>
