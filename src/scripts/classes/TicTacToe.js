@@ -19,13 +19,13 @@ export default class TicTacToe {
      * Die Methode akzeptiert zwei optionale Parameter: elementToAppendGameTo und cssFile.
      * Wenn diese Parameter nicht angegeben werden, werden Standardwerte verwendet.
      * 
-     * @param {HTMLElement} [elementToAppendGameTo=document.body] - Das HTML-Element, an das das Spiel angehängt wird. Default: document.body
+     * @param {HTMLElement} [elementToPrependGame=document.body] - Das HTML-Element, an das das Spiel angehängt wird. Default: document.body
      * @param {string} [cssFile="./src/styles/styles.css"] - Der Pfad zur CSS-Datei, die für das Spiel verwendet wird. Default: "./src/styles/styles.css"
      */
-    static initialize(elementToAppendGameTo = document.body, cssFile = "./src/styles/styles.css") {
+    static initialize(elementToPrependGame = document.body, cssFile = "./src/styles/styles.css") {
         
         // Create the html
-        HtmlCreator.createGame(elementToAppendGameTo, cssFile);
+        HtmlCreator.createGame(elementToPrependGame, cssFile);
         
         const board = new Board();
 
