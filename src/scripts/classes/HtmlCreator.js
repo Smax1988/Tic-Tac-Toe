@@ -10,12 +10,13 @@ export default class HtmlCreator {
 
     /**
      * Erstellt und hängt das Spiel an ein angegebenes HTML-Element an und fügt das CSS-Stylesheet hinzu.
-     * @param {HTMLElement} elementToAppendGame - Das HTML-Element, an das das Spiel angehängt werden soll.
+     * @param {HTMLElement} elementToPrependGame - Das HTML-Element, an das das Spiel angehängt werden soll.
      * @param {string} cssFile - Der Pfad zur CSS-Datei.
      */
-    static createGame(elementToAppendGame, cssFile) {
+    static createGame(elementToPrependGame, cssFile) {
         let gameContainer = this._createGameContainer();
-        elementToAppendGame.appendChild(gameContainer);
+        let firstChild = elementToPrependGame.firstChild;
+        elementToPrependGame.insertBefore(gameContainer, firstChild);
         gameContainer.appendChild(this._createMainMenu());
         gameContainer.appendChild(this._createNavigation());
         gameContainer.appendChild(this._createGameArea());
