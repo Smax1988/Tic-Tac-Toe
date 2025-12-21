@@ -120,11 +120,58 @@ Tic-Tac-Toe/
 <details>
 <summary>Click to expand</summary>
 
-Since ASP.NET serves static files from `wwwroot`, the npm package must be copied there.
+### Option 1: CDN (simplest)
 
-### Automatic copy on build
+No installation required - load directly from unpkg:
 
-Add the following to your `.csproj` file:
+```html
+<div id="game-container"></div>
+
+<script type="module">
+  import TicTacToe from 'https://unpkg.com/ttt-game/scripts/ttt-game.js';
+
+  const container = document.getElementById('game-container');
+  TicTacToe.initialize(container, 'https://unpkg.com/ttt-game/styles/styles.css');
+</script>
+```
+
+### Option 2: LibMan (local files)
+
+Add to your `libman.json`:
+
+```json
+{
+  "library": "ttt-game@1.0.9",
+  "provider": "unpkg",
+  "destination": "wwwroot/lib/ttt-game"
+}
+```
+
+Then include in your Razor Page:
+
+```html
+<div id="game-container"></div>
+
+<script type="module">
+  import TicTacToe from '/lib/ttt-game/scripts/ttt-game.js';
+
+  const container = document.getElementById('game-container');
+  TicTacToe.initialize(container, '/lib/ttt-game/styles/styles.css');
+</script>
+```
+
+### Option 3: npm + MSBuild (manual copy)
+
+<details>
+<summary>Click to expand</summary>
+
+Install via npm:
+
+```bash
+npm install ttt-game
+```
+
+Add to your `.csproj` to copy files on build:
 
 ```xml
 <Target Name="CopyTttGame" AfterTargets="Build">
@@ -137,18 +184,9 @@ Add the following to your `.csproj` file:
 </Target>
 ```
 
-### Include in Razor Page
+Then use the same include as Option 2.
 
-```html
-<div id="game-container"></div>
-
-<script type="module">
-  import TicTacToe from '/lib/ttt-game/scripts/ttt-game.js';
-
-  const container = document.getElementById('game-container');
-  TicTacToe.initialize(container, '/lib/ttt-game/styles/styles.css');
-</script>
-```
+</details>
 
 </details>
 
