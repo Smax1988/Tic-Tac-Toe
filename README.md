@@ -1,36 +1,36 @@
 # Tic Tac Toe
 
-Ein einfaches Tic-Tac-Toe-Spiel in Vanilla JavaScript - spielbar gegen einen anderen Menschen oder gegen den Computer (3 Schwierigkeitsstufen).
+A simple Tic-Tac-Toe game in Vanilla JavaScript - play against another human or against the computer (3 difficulty levels).
 
 ![Tic Tac Toe Demo](docs/demo.gif)
 
 ## Features
 
-- Mensch vs. Mensch
-- Mensch vs. Computer (Easy / Normal / Godlike)
-- Gewinn-Animation
-- Punktestand-Anzeige
+- Human vs. Human
+- Human vs. Computer (Easy / Normal / Godlike)
+- Win animation
+- Score tracking
 
 ---
 
-## Schnellstart
+## Quick Start
 
-### Option 1: Direkt im Browser
+### Option 1: Run directly in browser
 
-1. Repository klonen:
+1. Clone the repository:
    ```bash
    git clone https://github.com/Smax1988/Tic-Tac-Toe.git
    ```
 
-2. `index.html` im Browser öffnen - fertig!
+2. Open `index.html` in your browser - done!
 
-### Option 2: In dein eigenes Projekt einbinden
+### Option 2: Integrate into your own project
 
-1. Dateien kopieren:
-   - `src/scripts/` in dein Projekt
-   - `src/styles/styles.css` in dein Projekt
+1. Copy the files:
+   - `src/scripts/` to your project
+   - `src/styles/styles.css` to your project
 
-2. Im HTML einbinden:
+2. Include in your HTML:
    ```html
    <script type="module">
      import TicTacToe from './src/scripts/classes/TicTacToe.js';
@@ -41,33 +41,33 @@ Ein einfaches Tic-Tac-Toe-Spiel in Vanilla JavaScript - spielbar gegen einen and
    </script>
    ```
 
-Das Spiel wird automatisch am Anfang des `<body>` eingefuegt.
+The game will automatically be prepended to the `<body>` element.
 
 ---
 
-## Optionen
+## Options
 
-Die `initialize()`-Funktion akzeptiert zwei optionale Parameter:
+The `initialize()` function accepts two optional parameters:
 
-| Parameter | Beschreibung | Standardwert |
-|-----------|--------------|--------------|
-| `element` | HTML-Element, in das das Spiel eingefuegt wird | `document.body` |
-| `cssPath` | Pfad zur CSS-Datei | `"./src/styles/styles.css"` |
+| Parameter | Description | Default |
+|-----------|-------------|---------|
+| `element` | HTML element to prepend the game to | `document.body` |
+| `cssPath` | Path to the CSS file | `"./src/styles/styles.css"` |
 
-### Beispiele
+### Examples
 
-**Spiel in ein bestimmtes Element einfuegen:**
+**Prepend game to a specific element:**
 ```javascript
 const container = document.getElementById('game-container');
 TicTacToe.initialize(container);
 ```
 
-**Eigenen CSS-Pfad angeben:**
+**Specify custom CSS path:**
 ```javascript
 TicTacToe.initialize(undefined, '/assets/css/tictactoe.css');
 ```
 
-**Beides kombinieren:**
+**Combine both:**
 ```javascript
 const container = document.getElementById('game-container');
 TicTacToe.initialize(container, '/assets/css/tictactoe.css');
@@ -87,25 +87,25 @@ import TicTacToe from 'ttt-game';
 TicTacToe.initialize();
 ```
 
-> **Hinweis:** Das CSS muss separat eingebunden werden - entweder als `<link>` im HTML oder ueber den zweiten Parameter.
+> **Note:** The CSS must be included separately - either as a `<link>` in your HTML or via the second parameter.
 
 ---
 
-## Projektstruktur
+## Project Structure
 
 ```
 Tic-Tac-Toe/
-├── index.html                    # Demo-Seite
+├── index.html                    # Demo page
 ├── src/
 │   ├── scripts/
 │   │   ├── classes/
-│   │   │   ├── TicTacToe.js      # Hauptklasse (Einstiegspunkt)
-│   │   │   ├── Board.js          # Spielfeld-Logik
-│   │   │   ├── Computer.js       # KI (inkl. Minimax)
-│   │   │   ├── GameResult.js     # Gewinner-Ermittlung
-│   │   │   ├── HtmlCreator.js    # DOM-Erstellung
+│   │   │   ├── TicTacToe.js      # Main class (entry point)
+│   │   │   ├── Board.js          # Game board logic
+│   │   │   ├── Computer.js       # AI (including Minimax)
+│   │   │   ├── GameResult.js     # Winner detection
+│   │   │   ├── HtmlCreator.js    # DOM creation
 │   │   │   └── RandomColorAnimation.js
-│   │   └── ttt-game.js           # npm Entry-Point
+│   │   └── ttt-game.js           # npm entry point
 │   └── styles/
 │       └── styles.css
 ├── docs/
@@ -115,16 +115,16 @@ Tic-Tac-Toe/
 
 ---
 
-## Fuer ASP.NET Core Projekte
+## For ASP.NET Core Projects
 
 <details>
-<summary>Klicken zum Ausklappen</summary>
+<summary>Click to expand</summary>
 
-Da ASP.NET statische Dateien aus `wwwroot` serviert, muss das npm-Paket dorthin kopiert werden.
+Since ASP.NET serves static files from `wwwroot`, the npm package must be copied there.
 
-### Automatisches Kopieren beim Build
+### Automatic copy on build
 
-Fuege folgendes zu deiner `.csproj`-Datei hinzu:
+Add the following to your `.csproj` file:
 
 ```xml
 <Target Name="CopyTttGame" AfterTargets="Build">
@@ -137,7 +137,7 @@ Fuege folgendes zu deiner `.csproj`-Datei hinzu:
 </Target>
 ```
 
-### Einbindung in Razor Page
+### Include in Razor Page
 
 ```html
 <div id="game-container"></div>
@@ -154,6 +154,6 @@ Fuege folgendes zu deiner `.csproj`-Datei hinzu:
 
 ---
 
-## Lizenz
+## License
 
 MIT
