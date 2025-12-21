@@ -1,139 +1,159 @@
-## Usage
+# Tic Tac Toe
 
-### Github
+Ein einfaches Tic-Tac-Toe-Spiel in Vanilla JavaScript - spielbar gegen einen anderen Menschen oder gegen den Computer (3 Schwierigkeitsstufen).
 
-Clone from github:
-```bash
-git clone https://github.com/Smax1988/Tic-Tac-Toe.git
-```
+![Tic Tac Toe Demo](docs/demo.gif)
 
-Import the module TicTacToe and call the initialize function within a document ready. 
-If you don't pass an element as first parameter to the initialize function the game will be prepended to the body element.
+## Features
 
-Example:
+- Mensch vs. Mensch
+- Mensch vs. Computer (Easy / Normal / Godlike)
+- Gewinn-Animation
+- Punktestand-Anzeige
+
+---
+
+## Schnellstart
+
+### Option 1: Direkt im Browser
+
+1. Repository klonen:
+   ```bash
+   git clone https://github.com/Smax1988/Tic-Tac-Toe.git
+   ```
+
+2. `index.html` im Browser öffnen - fertig!
+
+### Option 2: In dein eigenes Projekt einbinden
+
+1. Dateien kopieren:
+   - `src/scripts/` in dein Projekt
+   - `src/styles/styles.css` in dein Projekt
+
+2. Im HTML einbinden:
+   ```html
+   <script type="module">
+     import TicTacToe from './src/scripts/classes/TicTacToe.js';
+
+     document.addEventListener('DOMContentLoaded', () => {
+       TicTacToe.initialize();
+     });
+   </script>
+   ```
+
+Das Spiel wird automatisch am Anfang des `<body>` eingefuegt.
+
+---
+
+## Optionen
+
+Die `initialize()`-Funktion akzeptiert zwei optionale Parameter:
+
+| Parameter | Beschreibung | Standardwert |
+|-----------|--------------|--------------|
+| `element` | HTML-Element, in das das Spiel eingefuegt wird | `document.body` |
+| `cssPath` | Pfad zur CSS-Datei | `"./src/styles/styles.css"` |
+
+### Beispiele
+
+**Spiel in ein bestimmtes Element einfuegen:**
 ```javascript
-import TicTacToe from './path/to' + '/src/scripts/classes/TicTacToe.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    TicTacToe.initialize();
-});
+const container = document.getElementById('game-container');
+TicTacToe.initialize(container);
 ```
 
-You can also provide an element to prepend the game by passing it to the initialize function, as shown below:
+**Eigenen CSS-Pfad angeben:**
 ```javascript
-import TicTacToe from './path/to' + '/src/scripts/classes/TicTacToe.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    let element = document.getElementById('your-element-id');
-    TicTacToe.initialize(element);
-});
+TicTacToe.initialize(undefined, '/assets/css/tictactoe.css');
 ```
 
-If the css styles are missing, you can pass the path to the styles.css file as a second parameter to the initialize function.
-Example with passing an element:
+**Beides kombinieren:**
 ```javascript
-import TicTacToe from './path/to' + '/src/scripts/classes/TicTacToe.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    let element = document.getElementById('your-element-id')
-    TicTacToe.initialize(element, './path/to/src/styles/styles.css');
-});
-```
-Example without passing an element:
-```javascript
-import TicTacToe from './path/to' + '/src/scripts/classes/TicTacToe.js';
-
-document.addEventListener('DOMContentLoaded', () => {
-    TicTacToe.initialize(undefined, './path/to/src/styles/styles.css');
-});
+const container = document.getElementById('game-container');
+TicTacToe.initialize(container, '/assets/css/tictactoe.css');
 ```
 
-You can also directly include the stylesheet in the head of your html and not pass a path:
-```html
-<link rel="stylesheet" href="./path/to/src/styles/styles.css" />
-```
-```javascript
-import TicTacToe from './path/to' + '/src/scripts/classes/TicTacToe.js';
+---
 
-document.addEventListener('DOMContentLoaded', () => {
-    TicTacToe.initialize();
-});
-```
+## Installation via npm
 
-### As npm package in asp.net Core project
-
-Navigate to the project you want to use the package in:
-```bash
-cd path/to/your/project
-```
-
-Install the npm package:
 ```bash
 npm install ttt-game
 ```
-This will create a folder node_modules in the root of your project.
 
-To be able to serve the static files of the npm package you have to copy the ttt-game folder from node_modules folder to wwwroot folder.
-You can do so by copying on build. Add the following code to your xyz.csproj file:
+```javascript
+import TicTacToe from 'ttt-game';
+
+TicTacToe.initialize();
+```
+
+> **Hinweis:** Das CSS muss separat eingebunden werden - entweder als `<link>` im HTML oder ueber den zweiten Parameter.
+
+---
+
+## Projektstruktur
+
+```
+Tic-Tac-Toe/
+├── index.html                    # Demo-Seite
+├── src/
+│   ├── scripts/
+│   │   ├── classes/
+│   │   │   ├── TicTacToe.js      # Hauptklasse (Einstiegspunkt)
+│   │   │   ├── Board.js          # Spielfeld-Logik
+│   │   │   ├── Computer.js       # KI (inkl. Minimax)
+│   │   │   ├── GameResult.js     # Gewinner-Ermittlung
+│   │   │   ├── HtmlCreator.js    # DOM-Erstellung
+│   │   │   └── RandomColorAnimation.js
+│   │   └── ttt-game.js           # npm Entry-Point
+│   └── styles/
+│       └── styles.css
+├── docs/
+│   └── demo.gif
+└── README.md
+```
+
+---
+
+## Fuer ASP.NET Core Projekte
+
+<details>
+<summary>Klicken zum Ausklappen</summary>
+
+Da ASP.NET statische Dateien aus `wwwroot` serviert, muss das npm-Paket dorthin kopiert werden.
+
+### Automatisches Kopieren beim Build
+
+Fuege folgendes zu deiner `.csproj`-Datei hinzu:
 
 ```xml
-<Target Name="CopyNodeModules" AfterTargets="Build">
-	<!-- Define the destination directory path within the target -->
-	<PropertyGroup>
-		<DestinationDir>wwwroot/lib/ttt-game</DestinationDir>
-	</PropertyGroup>
-	
-	<!-- Create the destination directory if it does not exist -->
-	<MakeDir Directories="$(DestinationDir)" />
-
-	<!-- Define the files to be copied from the source directory -->
-	<ItemGroup>
-		<SourceFiles Include="node_modules/ttt-game/**/*.*" />
-	</ItemGroup>
-
-	<Message Text="Npm Package ttt-game: Start copying node module 'ttt-game' to $(DestinationDir)." Importance="High"/>
-	
-	<!-- Copy the files from the source directory to the destination directory -->
-	<Copy SourceFiles="@(SourceFiles)" 
-		  DestinationFiles="@(SourceFiles->'$(DestinationDir)/%(RecursiveDir)%(Filename)%(Extension)')" 
-		  SkipUnchangedFiles="true" 
-		  Retries="3" 
-		  RetryDelayMilliseconds="1000" />
-
-
-	<Message Text="Npm Package ttt-game: SUCCESS: Node module 'ttt-game' successfully copied to $(DestinationDir)" Condition="'@(SourceFiles)' != ''" Importance="High" />
-	<Message Text="Npm Package ttt-game: ERROR: Failed to copy node module 'ttt-game' to $(DestinationDir)." Condition="'@(SourceFiles)' == ''" Importance="High" />
+<Target Name="CopyTttGame" AfterTargets="Build">
+  <ItemGroup>
+    <TttFiles Include="node_modules/ttt-game/**/*.*" />
+  </ItemGroup>
+  <Copy SourceFiles="@(TttFiles)"
+        DestinationFiles="@(TttFiles->'wwwroot/lib/ttt-game/%(RecursiveDir)%(Filename)%(Extension)')"
+        SkipUnchangedFiles="true" />
 </Target>
 ```
 
-Import TicTacToe and call the initialize function within a document ready. Pass the path to the styles.css file as second parameter. The path shown in the example below might be different for you depending on the location where you copied the npm package to. If you chose wwwroot/lib/ttt-game (as it is shown in the XML above) you pass "../lib/ttt-game/styles/styles.css" as second parameter. 
-If you omit the first parameter to the initialize function the game will be prepended to the body element.
-```html
-<script type="module">
-    import TicTacToe from '../lib/ttt-game/scripts/ttt-game.js'; // you might have a different path here
+### Einbindung in Razor Page
 
-    TicTacToe.initialize(undefined, "../lib/ttt-game/styles/styles.css"); // you might have a different path here
+```html
+<div id="game-container"></div>
+
+<script type="module">
+  import TicTacToe from '/lib/ttt-game/scripts/ttt-game.js';
+
+  const container = document.getElementById('game-container');
+  TicTacToe.initialize(container, '/lib/ttt-game/styles/styles.css');
 </script>
 ```
 
-With element and path:
-```html
-<script type="module">
-    import TicTacToe from '../lib/ttt-game/scripts/ttt-game.js'; // you might have a different path here
+</details>
 
-    let element = document.getElementById('your-element-id');
-    TicTacToe.initialize(element, "../lib/ttt-game/styles/styles.css"); // you might have a different path here
-</script>
-```
+---
 
-You can also directly include the stylesheet in the head of your html and not pass a path:
-```html
-<link rel="stylesheet" href="./path/to/src/styles/styles.css" />
-```
-```html
-<script type="module">
-    import TicTacToe from '../lib/ttt-game/scripts/ttt-game.js'; // you might have a different path here
+## Lizenz
 
-    TicTacToe.initialize();
-</script>
-```
+MIT
