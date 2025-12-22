@@ -15,14 +15,22 @@ A simple Tic-Tac-Toe game in Vanilla JavaScript - play against another human or 
 
 ## Quick Start
 
-### Option 1: Run directly in browser
+### Option 1: Run with a local server
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Smax1988/Tic-Tac-Toe.git
+   cd Tic-Tac-Toe
    ```
 
-2. Open `index.html` in your browser - done!
+2. Start a local server (ES modules require HTTP, not file://):
+   ```bash
+   npx serve
+   ```
+
+3. Open http://localhost:3000 in your browser - done!
+
+> **Tip:** In VS Code, you can also use the "Live Server" extension.
 
 ### Option 2: Integrate into your own project
 
