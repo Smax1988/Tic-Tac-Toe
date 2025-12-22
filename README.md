@@ -41,7 +41,7 @@ A simple Tic-Tac-Toe game in Vanilla JavaScript - play against another human or 
 2. Include in your HTML:
    ```html
    <script type="module">
-     import TicTacToe from './src/scripts/classes/TicTacToe.js';
+     import TicTacToe from './src/scripts/game/TicTacToe.js';
 
      document.addEventListener('DOMContentLoaded', () => {
        TicTacToe.initialize();
@@ -106,7 +106,7 @@ Tic-Tac-Toe/
 ├── index.html                    # Demo page
 ├── src/
 │   ├── scripts/
-│   │   ├── classes/
+│   │   ├── game/
 │   │   │   ├── TicTacToe.js      # Main class (entry point)
 │   │   │   ├── Board.js          # Game board logic
 │   │   │   ├── Computer.js       # AI (including Minimax)
@@ -149,7 +149,7 @@ Add to your `libman.json`:
 
 ```json
 {
-  "library": "ttt-game@1.0.9",
+  "library": "ttt-game@1.1.0",
   "provider": "unpkg",
   "destination": "wwwroot/lib/ttt-game"
 }

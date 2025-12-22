@@ -6,35 +6,26 @@ import GameResult from './GameResult.js';
 import RandomColorAnimation from './RandomColorAnimation.js';
 
 /**
- * Diese Klasse repräsentiert das TicTacToe-Spiel. Sie enthält die statische Methode initialize,
- * die das Spiel initialisiert, das HTML-Layout erstellt und alle erforderlichen Event-Listener
- * für die Interaktion mit dem Spiel hinzufügt. Die Klasse nutzt dabei die Board-Klasse, um das
- * Spielbrett zu verwalten und die Spielmechanik zu handhaben.
+ * Main entry point for the Tic Tac Toe game.
+ * Handles initialization, creates the UI, and sets up all event listeners
+ * for user interaction. Uses the Board class for game state management.
  */
 export default class TicTacToe {
 
     /**
-     * Diese Methode initialisiert das TicTacToe-Spiel. Sie erstellt das HTML-Layout für das Spiel,
-     * fügt Event-Listener für die Benutzerinteraktion hinzu und konfiguriert die Spielparameter.
-     * Die Methode akzeptiert zwei optionale Parameter: elementToAppendGameTo und cssFile.
-     * Wenn diese Parameter nicht angegeben werden, werden Standardwerte verwendet.
-     * 
-     * @param {HTMLElement} [elementToPrependGame=document.body] - Das HTML-Element, an das das Spiel angehängt wird. Default: document.body
-     * @param {string} [cssFile="./src/styles/styles.css"] - Der Pfad zur CSS-Datei, die für das Spiel verwendet wird. Default: "./src/styles/styles.css"
+     * Initializes the game by creating the HTML layout and attaching event listeners.
+     * @param {HTMLElement} [elementToPrependGame=document.body] - Container element for the game.
+     * @param {string} [cssFile="./src/styles/styles.css"] - Path to the CSS stylesheet.
      */
     static initialize(elementToPrependGame = document.body, cssFile = "./src/styles/styles.css") {
-        
-        // Create the html
-        HtmlCreator.createGame(elementToPrependGame, cssFile);
-        
-        const board = new Board();
 
+        // Create the HTML structure
+        HtmlCreator.createGame(elementToPrependGame, cssFile);
+
+        const board = new Board();
         let winner = -1;
 
-        /**
-         * Selektierungen der Elemente des Menu-Overlays:
-         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         */
+        // Menu overlay elements
         const overlay = document.querySelector(".overlay");
         const computerButton = document.querySelector("#computer");
         const human = document.querySelector("#human");
@@ -44,25 +35,18 @@ export default class TicTacToe {
         const godlike = document.querySelector("#godlike");
         const closeMenu = document.querySelector("#bt-cancel");
 
-
-        /**
-         * Selektierung der Buttons in der Game-Area:
-         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         */
+        // Game area buttons
         const newGame = document.querySelector("#bt-new-game");
         const menu = document.querySelector("#bt-menu");
 
+        // --- Menu overlay event handlers ---
 
-        /**
-         * Click Events für Buttons im Menu-Overlay:
-         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         */
-        // Dieser Button schließt das Menu-Overlay
+        // Close menu button
         closeMenu.addEventListener("click", () => {
             overlay.style.display = "none";
         });
 
-        // Dieser Button toggelt das Untermenü zur Auswahl der Schwierigkeitsstufen des Computergegners
+        // Toggle difficulty submenu
         computerButton.addEventListener("click", () => {
             if (difficulty.style.visibility === "hidden") {
                 difficulty.style.visibility = "visible";
@@ -71,9 +55,7 @@ export default class TicTacToe {
             }
         });
 
-        // Dieser Button setzt den Computer auf true, setzt die Schwierigkeit auf "easy",
-        // setzt die Total Wins aller Spieler auf 0 zurück und setzt das gesamte Spiel auf Anfang zurück,
-        // schleißt das Menu-Overlay und stoppt die Winanimation.
+        // Difficulty: Easy - random moves
         easy.addEventListener("click", () => {
             board.setComputer(true);
             board.setDifficulty("easy");
@@ -83,9 +65,7 @@ export default class TicTacToe {
             RandomColorAnimation.stopRepeatFunction();
         });
 
-        // Dieser Button setzt den Computer auf true, setzt die Schwierigkeit auf "normal",
-        // setzt die Total Wins aller Spieler auf 0 zurück und setzt das gesamte Spiel auf Anfang zurück,
-        // schleißt das Menu-Overlay und stoppt die Winanimation.
+        // Difficulty: Normal - blocks wins and takes winning moves
         normal.addEventListener("click", () => {
             board.setComputer(true);
             board.setDifficulty("normal");
@@ -95,9 +75,7 @@ export default class TicTacToe {
             RandomColorAnimation.stopRepeatFunction();
         });
 
-        // Dieser Button setzt den Computer auf true, setzt die Schwierigkeit auf "godlike",
-        // setzt die Total Wins aller Spieler auf 0 zurück, setzt das gesamte Spiel auf Anfang zurück,
-        // schleißt das Menu-Overlay und stoppt die Winanimation.
+        // Difficulty: Godlike - unbeatable (Minimax algorithm)
         godlike.addEventListener("click", () => {
             board.setComputer(true);
             board.setDifficulty("godlike");
@@ -107,8 +85,7 @@ export default class TicTacToe {
             RandomColorAnimation.stopRepeatFunction();
         });
 
-        // Dieser Button setzt den computer auf false, setzt die Total Wins aller Spieler auf 0 zurück,
-        // setzt das gesamte Spiel auf Anfang zurück, schließt das Menu-Overlay und stoppt die Winanimation.
+        // Human vs Human mode
         human.addEventListener("click", () => {
             board.setComputer(false);
             board.resetTotalWins();
@@ -117,42 +94,34 @@ export default class TicTacToe {
             RandomColorAnimation.stopRepeatFunction();
         });
 
+        // --- Game board click handlers ---
 
-        /**
-         * Click Events für alle Felder (=Spaces) auf dem Spielfeld (=Board):
-         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         */
         board.spaces.forEach(space => {
             space.addEventListener("click", (event) => {
-                
-                // Verhindern, dass auf ein Feld gesetzt werden kann, das bereits belegt ist bzw. wenn ein Gewinner feststeht
-                if (space.innerHTML === "X" || 
+
+                // Ignore clicks on occupied cells or if game is over
+                if (space.innerHTML === "X" ||
                     space.innerHTML === "O" ||
                     [1, 2].includes(GameResult.getGameResult(board._board))
                     ) return;
 
-                // Computer als Gegner:
-                // Spieler X beginnt und setzt seinen Zug. Dieser Wird in die Ergebnismatrix eingetragen.
-                // Danach wird der Spieler gewechselt und der Spieler, welcher nun an der Reihe ist im Game-Display angezeigt.
                 if (board.computer) {
+                    // Player makes a move
                     board.playerSetSymbol(space);
                     let id = board.getElementId(event);
                     Board.writeToBoard(board._board, id, board.player);
                     board.switchPlayer();
                     board.displayPlayer();
 
-                    // Wenn noch kein Gewinner feststeht, ist der Computer nun an der Reihe und setzt sein Symbol.
-                    // Danach wird der Spieler gewechselt und der Spieler, welcher nun an der Reihe ist im Game-Display angezeigt.
+                    // Computer responds if game is still ongoing
                     if (GameResult.getGameResult(board._board) === -1) {
                         board.computerSetSymbol(board._board);
                         board.switchPlayer();
                         board.displayPlayer();
                     }
 
-                // Mensch als Gegner:
-                // Spieler X beginnt und setzt seinen Zug. Dieser wird in die Ergebnismatrix eingetragen.
-                // Danach wird der Spieler gewechselt und der Spieler, welcher nun an der Reihe ist im Game-Display angezeigt.
                 } else {
+                    // Human vs Human: alternate turns
                     board.playerSetSymbol(space);
                     let id = board.getElementId(event);
                     Board.writeToBoard(board._board, id, board.player);
@@ -160,7 +129,7 @@ export default class TicTacToe {
                     board.displayPlayer();
                 }
 
-                // Wenn ein Gewinner feststeht wird dieser im Game-Display angezeigt und die Total Wins beider Spieler angezeigt. 
+                // Check for winner and update display
                 winner = GameResult.getGameResult(board._board);
                 if (winner !== -1) {
                     board.displayGameResult(winner);
@@ -169,18 +138,15 @@ export default class TicTacToe {
             })
         });
 
+        // --- Game area button handlers ---
 
-        /**
-         * Click Events für Buttons in der Game-Area:
-         * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-         */
-        // Dieser Button stoppt die Win-Animation und setzt das gesamte Spiel auf Anfang zurück.
+        // New Game button - reset board but keep scores
         newGame.addEventListener("click", () => {
             RandomColorAnimation.stopRepeatFunction();
             board.resetGame();
         })
 
-        // Dieser Button öffnet das Menu-Overlay
+        // Menu button - open overlay
         menu.addEventListener("click", () => {
             overlay.removeAttribute("style");
             difficulty.style.visibility = "hidden";

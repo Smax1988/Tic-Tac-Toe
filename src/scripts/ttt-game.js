@@ -1,6 +1,6 @@
 "use strict";
 
-import TicTacToe from './classes/TicTacToe.js';
+import TicTacToe from './game/TicTacToe.js';
 
 
 export default TicTacToe;
